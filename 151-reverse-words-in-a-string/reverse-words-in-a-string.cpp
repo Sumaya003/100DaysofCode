@@ -1,35 +1,36 @@
-#include <string>
-#include <vector>
-#include <sstream>
-#include <algorithm>
-
 class Solution {
 public:
     string reverseWords(string s) {
-        istringstream iss(s);
-        string word;
-        vector<string> words;
-        
-        // Split the string by spaces and store each word in a vector
-        while (iss >> word) {
-            words.push_back(word);
+        vector<string> store;
+        string word = "";
+        for(char x:s){
+            if(x!=' '){
+                word.push_back(x);
+                
+            }else{
+                if(!word.empty()){
+                    
+                    store.push_back(word);
+                    word = "";
+                }
+            }
         }
         
-        // Reverse the order of words in the vector
-        reverse(words.begin(), words.end());
-        
-        // Join the words with a single space between them
-        stringstream result;
-        for (const string& w : words) {
-            result << w << " ";
+        if(!word.empty()) {
+            store.push_back(word);
         }
         
-        // Convert stringstream to string and remove trailing space
-        string reversed = result.str();
-        if (!reversed.empty()) {
-            reversed.pop_back(); // Remove the trailing space
+        word="";
+        reverse(store.begin(),store.end());
+    
+        for (size_t i = 0; i < store.size(); ++i) {
+            word += store[i];
+            if (i != store.size() - 1) {
+                word += " ";
         }
-        
-        return reversed;
     }
+
+    return word;
+}
+
 };
