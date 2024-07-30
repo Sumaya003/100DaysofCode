@@ -16,6 +16,11 @@ public:
         string ans = "";
 
         while(!st.empty())
+        //This result in Memory issue as string is created repeatedly
+        // {
+        //     ans = st.top() + ans;      
+        //     st.pop();
+        // }
         {
             ans.push_back(st.top());
             st.pop();
