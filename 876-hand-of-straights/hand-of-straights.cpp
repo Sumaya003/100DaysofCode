@@ -7,17 +7,17 @@ public:
         }
 
         // Step 2: Count the occurrences of each card
-        std::unordered_map<int, int> count;
+        unordered_map<int, int> count;
         for (int card : hand) {
             count[card]++;
         }
 
         // Step 3: Sort the unique card values
-        std::vector<int> sortedKeys;
+        vector<int> sortedKeys;
         for (auto& pair : count) {
             sortedKeys.push_back(pair.first);
         }
-        std::sort(sortedKeys.begin(), sortedKeys.end());
+        sort(sortedKeys.begin(), sortedKeys.end());
 
         // Step 4: Form consecutive groups
         for (int key : sortedKeys) {
