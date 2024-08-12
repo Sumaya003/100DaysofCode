@@ -4,19 +4,21 @@ public:
         set<string> s(begin(dict), end(dict));
         istringstream iss(sentence);
         vector<string> temp;
-        string word, res; 
+        string word, res;
 
-        while(iss >> word) temp.push_back(word);
-        for(string t : temp) {
+        while (iss >> word)
+            temp.push_back(word);
+        for (string t : temp) {
             int i = 0;
-            while(i++ <= t.length()) {
+            while (i++ <= t.length()) {
                 string curr = t.substr(0, i);
-                if(s.find(curr) != s.end()) {
+                if (s.find(curr) != s.end()) {
                     res += curr + " ";
                     break;
                 }
-                
-                if(i == t.length()) res += curr + " ";
+
+                if (i == t.length())
+                    res += curr + " ";
             }
         }
 
