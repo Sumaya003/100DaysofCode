@@ -21,7 +21,7 @@ private:
 public:
     vector<string> letterCombinations(string digits) {
         vector<string> ans;
-        if(digits.size() == 0)
+        if(digits == "")
             return ans;
         int index=0;
         string output;
