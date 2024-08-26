@@ -1,36 +1,32 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        if (intervals.size() <= 1) {
+            return intervals;
+        }
         
-      if(intervals.size()==1)
-         return intervals;
-      vector<pair<int,int>> p;
-      for(int i=0;i<intervals.size();i++)
-      {
-          p.push_back({intervals[i][0],intervals[i][1]});
-      } 
-      sort(p.begin(),p.end());
-
-      vector<vector<int>> ans;
-      int f=p[0].first,s=p[0].second;
-      for(int i=0;i<p.size()-1;i++)
-      {
-          vector<int> a(2);
-          if(s>=p[i+1].first)
-          {
-              s=max(s,p[i+1].second);
-          }
-          else
-          {
-              a[0]=f;
-              a[1]=s;
-              f=p[i+1].first;
-              s=p[i+1].second;
-              ans.push_back(a);
-          }
-      } 
-      int n=intervals.size();
-      ans.push_back({f,s});
-      return ans;
+        // Sort the intervals based on the starting times
+        sort(intervals.begin(), intervals.end());
+        
+        vector<vector<int>> ans;
+        vector<int> currentInterval = intervals[0];
+        
+        for (int i = 1; i < intervals.size(); i++) {
+            // If the current interval overlaps with the next one
+            if (intervals[i][0] <= currentInterval[1]) {
+                // Merge the intervals by extending the end time
+                currentInterval[1] = max(currentInterval[1], intervals[i][1]);
+            } else {
+                // No overlap, so add the current interval to the answer
+                ans.push_back(currentInterval);
+                // Move to the next interval
+                currentInterval = intervals[i];
+            }
+        }
+        
+        // Add the last interval
+        ans.push_back(currentInterval);
+        
+        return ans;
     }
 };
