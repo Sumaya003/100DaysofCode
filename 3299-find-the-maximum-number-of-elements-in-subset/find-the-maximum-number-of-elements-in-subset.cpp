@@ -1,30 +1,30 @@
 class Solution {
 public:
     int maximumLength(vector<int>& nums) {
-        int res = 1;
-        unordered_map<long, int> ump;
-        map<long, int> mp;
-        for (auto& x: nums)
-            mp[x]++, ump[x]++;
-                
-        for (auto& [x, freq]: mp) {
-            int cnt = 1;
-            if (!ump.count(x))
+        int result = 1;
+        unordered_map<int, int> freq;
+        for (auto num : nums) freq[num]++;
+
+        for (auto [k, v] : freq) {
+            if (k == 1) {
+                result = max(result, v - (v % 2 == 0));
                 continue;
-            if (x == 1) {
-                cnt = (freq % 2) ? freq : freq-1;
-            } else {
-                long i = x;
-                while (ump.count(i) and ump[i] >= 2 and ump.count(i*i)) {
-                    cnt += 2;
-                    ump[i] -= 2;
-                    if (ump[i] <= 0)
-                        ump.erase(i);
-                    i = i*i;
-                }
             }
-            res = max(res, cnt);
+
+            long long curr = k;
+            int length = 1;
+
+            while (freq.count(curr) && freq[curr] >= 2 && curr < sqrt(INT_MAX)) {
+                int next = curr * curr;
+                if (freq.count(next) && freq[next] >= 1) {
+                    length += 2;
+                }
+                curr = next;
+            }
+
+            result = max(result, length);
         }
-        return res;
+
+        return result;
     }
 };
