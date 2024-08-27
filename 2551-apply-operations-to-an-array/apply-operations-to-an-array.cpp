@@ -1,20 +1,18 @@
 class Solution {
 public:
     vector<int> applyOperations(vector<int>& nums) {
-        for (int i = 0; i < nums.size() - 1; i++) {
+        for (int i = 0; i < nums.size()-1; i++) {
             if (nums[i] == nums[i + 1]) {
                 nums[i] *= 2;
                 nums[i + 1] = 0;
             }
         }
-        int index = 0;
+        int j = 0; // Pointer to track position for the next non-zero element
         for (int i = 0; i < nums.size(); i++) {
             if (nums[i] != 0) {
-                nums[index++] = nums[i];
+                swap(nums[i], nums[j]); 
+                j++;
             }
-        }
-        for (int i = index; i < nums.size(); i++) {
-            nums[i] = 0;
         }
         return nums;
     }
