@@ -11,16 +11,17 @@ public:
             }
         }
 
-        int a = 0, b = 0;
-        while (!st.empty()) {
-            if (st.top() == '{') {
-                a++;
-                st.pop();
-            } else {
-                b++;
-                st.pop();
-            }
-        }
-        return (a-b)<0?b-a:a-b;
+        // int a = 0, b = 0;
+        // while (!st.empty()) {
+        //     if (st.top() == '{') {
+        //         a++;
+        //         st.pop();
+        //     } else {
+        //         b++;
+        //         st.pop();
+        //     }
+        // }
+        
+        return st.size();
     }
 };
